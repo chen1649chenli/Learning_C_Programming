@@ -6,8 +6,10 @@
 #include <mqueue.h>
 
 #define MAX_SIZE 4096
-#define QUEUE_NAME "test queue"
+#define QUEUE_NAME "/test queue"
 #define STOP_MESSAGE "exit"
+
+/*compilation command gcc mqueue_client.c -o mqueue_client -lrt*/
 
 int main(int argc, char **argv)
 {
@@ -29,7 +31,7 @@ int main(int argc, char **argv)
         /* send the message */
         mq_send(mq, buffer, MAX_SIZE, 0);
 
-    } while (strncmp(buffer, MSG_STOP, strlen(MSG_STOP)));
+    } while (strncmp(buffer, STOP_MESSAGE , strlen(STOP_MESSAGE )));
 
 
     return 0;

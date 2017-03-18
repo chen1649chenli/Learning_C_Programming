@@ -8,8 +8,11 @@
 
 
 #define MAX_SIZE 4096
-#define QUEUE_NAME "test queue"
+#define QUEUE_NAME "/test queue"
 #define STOP_MESSAGE "exit"
+
+
+/*compilation command gcc mqueue_server.c -o mqueue_server -lrt*/
 
 int main(int argc, char **argv){
     mqd_t mq;
@@ -34,7 +37,7 @@ int main(int argc, char **argv){
       bytes_read = mq_receive(mq, buffer, MAX_SIZE, NULL);
 
       buffer[bytes_read] = '\0';
-      if (! strncmp(buffer, MSG_STOP, strlen(MSG_STOP))){
+      if (! strncmp(buffer, STOP_MESSAGE , strlen(STOP_MESSAGE))){
           must_stop = 1;
       } else {
           printf("Received: %s\n", buffer);
